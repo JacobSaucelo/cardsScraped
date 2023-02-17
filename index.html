@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valorant cards</title>
+
+    <link rel="stylesheet" href="stylesheet.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Valorant Cards</h1>
+    <p>valorant cards images scraped from the web</p>
+
+    <div id="cards"></div>
+
+    <script>
+      let app = document.querySelector("#cards");
+
+      (async function getImages() {
+        const response = await fetch("./images.json");
+        const data = await response.json();
+
+        app.innerHTML = `<div class="imagesContainer">
+            ${data.map((links) => {
+              return `
+              <img src="${links.imagePic.split("revision")[0]}" alt="valocard"/>
+              `;
+            })}
+            </div>`;
+      })();
+    </script>
+  </body>
+</html>
